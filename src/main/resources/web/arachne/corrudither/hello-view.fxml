@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/17.0.2-ea" fx:controller="web.arachne.corrudither.CorruController">
+  <left>
+
+    <VBox spacing="20.0" xmlns:fx="http://javafx.com/fxml">
+      <HBox alignment="TOP_CENTER">
+        <padding>
+          <Insets bottom="10" left="10" right="10" top="10" />
+        </padding>
+        <TextField fx:id="imageUri" />
+        <Button fx:id="fileChooseButton" onAction="#openFile" text="Open" />
+      </HBox>
+
+      <HBox alignment="TOP_CENTER">
+        <Label text="Contrast"/>
+        <Slider/>
+      </HBox>
+
+      <HBox alignment="TOP_CENTER">
+        <Label text="Brightness"/>
+        <Slider/>
+      </HBox>
+
+      <padding>
+        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+      </padding>
+    </VBox>
+  </left>
+
+  <center>
+    <ScrollPane>
+      <AnchorPane>
+        <ImageView fx:id="imageView" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="0"/>
+      </AnchorPane>
+    </ScrollPane>
+  </center>
+
+  <bottom>
+    <HBox alignment="CENTER_RIGHT">
+      <Button text="Save" onAction="#saveFile"/>
+      <Button text="Quit" onAction="#quit"/>
+
+      <padding>
+        <Insets bottom="10.0" left="20.0" right="20.0" top="10.0" />
+      </padding>
+
+    </HBox>
+  </bottom>
+
+</BorderPane>

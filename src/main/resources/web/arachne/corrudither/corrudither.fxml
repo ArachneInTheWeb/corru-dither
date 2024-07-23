@@ -19,12 +19,14 @@
 
       <HBox alignment="TOP_CENTER">
         <Label text="Contrast"/>
-        <Slider/>
+        <Slider fx:id="contrastSlider" min="-1" max="2"/>
+        <TextField fx:id="contrastSliderValue"/>
       </HBox>
 
       <HBox alignment="TOP_CENTER">
         <Label text="Brightness"/>
-        <Slider/>
+        <Slider fx:id="brightnessSlider" min="-2" max="2"/>
+        <TextField fx:id="brightnessSliderValue"/>
       </HBox>
 
       <padding>

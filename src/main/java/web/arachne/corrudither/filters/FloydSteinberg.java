@@ -147,11 +147,6 @@ public class FloydSteinberg extends Filter {
             return new ColorVector(Math.round(r() * s), Math.round(g() * s), Math.round(b() * s));
         }
 
-        Color toFXColor(){
-
-            return Color.color(r(), g(), b());
-        }
-
         ColorVector findNewColor(){
             int shortestDistanceIndex = Integer.MAX_VALUE;
             double shortestDistance = Double.MAX_VALUE;

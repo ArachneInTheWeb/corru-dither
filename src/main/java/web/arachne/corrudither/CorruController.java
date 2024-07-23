@@ -7,6 +7,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.stage.FileChooser;
+import web.arachne.corrudither.filters.BrightnessContrast;
 import web.arachne.corrudither.filters.Filter;
 import web.arachne.corrudither.filters.FloydSteinberg;
 
@@ -16,10 +17,24 @@ import java.util.Arrays;
 import java.util.List;
 
 public class CorruController {
+
+    @FXML
+    public Slider contrastSlider;
+
+    @FXML
+    public TextField contrastSliderValue;
+
+    @FXML
+    public TextField brightnessSliderValue;
+
+    @FXML Slider brightnessSlider;
+
     @FXML
     private ImageView imageView;
 
     private final ImageHandler imageHandler = new ImageHandler();
+
+    private File loadedFile;
 
 
     @FXML
@@ -48,10 +63,11 @@ public class CorruController {
         File file = fileChooser.showOpenDialog(fileChooseButton.getScene().getWindow());
 
         if (file != null){
+
             imageUri.setText(file.getAbsolutePath());
             try {
                 imageHandler.load(file);
-
+                loadedFile = file;
             } catch (IOException e) {
                 Alert alert  = new Alert(Alert.AlertType.ERROR, e.getMessage(), ButtonType.CLOSE);
                 alert.showAndWait();
@@ -79,8 +95,13 @@ public class CorruController {
     @FXML
     protected void updateDisplay(){
 
+        if (loadedFile == null){
+            return;
+        }
+
         List<Filter> filters = new ArrayList<>();
 
+        filters.add(new BrightnessContrast(contrastSlider.getValue(), brightnessSlider.getValue()));
         filters.add(new FloydSteinberg(palette));
 
         imageView.setImage(imageHandler.process(filters));
@@ -95,6 +116,18 @@ public class CorruController {
     public void initialize(){
         FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("Image Files", "*.jpg", "*.png", "*.gif", "*.bmp");
         fileChooser.getExtensionFilters().add(extFilter);
+
+
+        brightnessSliderValue.textProperty().bind(brightnessSlider.valueProperty().asString("%.2f"));
+        contrastSliderValue.textProperty().bind(contrastSlider.valueProperty().asString("%.2f"));
+
+        brightnessSlider.setOnMouseReleased((event) -> {
+            updateDisplay();
+        });
+
+        contrastSlider.setOnMouseReleased((event) -> {
+            updateDisplay();
+        });
     }
 
 

@@ -12,6 +12,7 @@
 - - -
 - [x] Lightness slider
 - [x] Contrast slider
+- [ ] Reimplement GIMP version of brightness/contrast slider
 - [ ] Transparency support
 - [ ] Support for customisable palettes
   - [ ] Palette saving and loading

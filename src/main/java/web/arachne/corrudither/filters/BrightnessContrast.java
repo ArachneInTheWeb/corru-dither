@@ -4,17 +4,21 @@ import java.awt.image.BufferedImage;
 import java.awt.image.RescaleOp;
 
 public class BrightnessContrast extends Filter {
-    private final float scaleFactor;
-    private final int brightnessAdd;
-    public BrightnessContrast(double contrastScale, double brightnessAdd){
-        this.scaleFactor = (float)(contrastScale + 1.0);
-        this.brightnessAdd = (int) Math.round(brightnessAdd * 127);
+    private final double brightness;
+    private final double slant;
+    public BrightnessContrast(double contrast, double brightness){
+        this.brightness = brightness / 2.0;
+        this.slant = Math.tan((contrast + 1) * 3.14159);
     }
+
+    /*
+     * Brightness/Contrast sliders implementation based on the one used by GIMP
+     * https://github.com/GNOME/gimp/blob/45f390ffc4ec765578f4a47a002e722b1d2e4a8f/app/operations/gimpoperationbrightnesscontrast.c
+     */
 
     @Override
     public BufferedImage process(BufferedImage image) {
 
-        RescaleOp rescaleOp = new RescaleOp(scaleFactor, brightnessAdd, null);
-        return rescaleOp.filter(image, null);
+        return image;
     }
 }

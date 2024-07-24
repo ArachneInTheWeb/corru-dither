@@ -28,6 +28,7 @@
         <Slider fx:id="brightnessSlider" min="-2" max="2"/>
         <TextField fx:id="brightnessSliderValue"/>
       </HBox>
+      <ListView fx:id="paletteList"/>
 
       <padding>
         <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />

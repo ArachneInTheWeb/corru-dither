@@ -1,12 +1,16 @@
 package web.arachne.corrudither;
 
 import javafx.application.Platform;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
+import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
+import javafx.util.Callback;
 import web.arachne.corrudither.filters.BrightnessContrast;
 import web.arachne.corrudither.filters.Filter;
 import web.arachne.corrudither.filters.FloydSteinberg;
@@ -27,7 +31,11 @@ public class CorruController {
     @FXML
     public TextField brightnessSliderValue;
 
-    @FXML Slider brightnessSlider;
+    @FXML
+    public ListView<List<Color>> paletteList;
+
+    @FXML
+    private Slider brightnessSlider;
 
     @FXML
     private ImageView imageView;
@@ -46,17 +54,6 @@ public class CorruController {
     @FXML
     private final FileChooser fileChooser = new FileChooser();
 
-
-    private final ArrayList<javafx.scene.paint.Color> palette = new ArrayList<>(Arrays.asList(
-//            javafx.scene.paint.Color.rgb( 85, 255, 255),
-//            javafx.scene.paint.Color.rgb( 255, 85, 255),
-            javafx.scene.paint.Color.rgb( 255, 0, 101),
-            javafx.scene.paint.Color.rgb( 255, 255, 0),
-            javafx.scene.paint.Color.rgb( 255, 255, 255),
-            javafx.scene.paint.Color.rgb( 0, 0, 0)
-    )){
-
-    };
 
     @FXML
     protected void openFile(){
@@ -112,6 +109,13 @@ public class CorruController {
         Platform.exit();
     }
 
+    private final ArrayList<Color> palette = new ArrayList<>(Arrays.asList(
+            Color.rgb( 255, 0, 101),
+            Color.rgb( 255, 255, 0),
+            Color.rgb( 255, 255, 255),
+            Color.rgb( 0, 0, 0)
+    ));
+
     @FXML
     public void initialize(){
         FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("Image Files", "*.jpg", "*.png", "*.gif", "*.bmp");
@@ -128,6 +132,33 @@ public class CorruController {
         contrastSlider.setOnMouseReleased((event) -> {
             updateDisplay();
         });
+
+        ObservableList<List<Color>> palettes = FXCollections.observableArrayList();
+
+        palettes.add(new ArrayList<>(Arrays.asList(
+                Color.rgb( 255, 0, 101),
+                Color.rgb( 255, 255, 0),
+                Color.rgb( 255, 255, 255),
+                Color.rgb( 0, 0, 0)
+        )));
+
+        palettes.add(new ArrayList<>(Arrays.asList(
+                Color.rgb( 85, 255, 255),
+                Color.rgb( 255, 85, 255),
+                Color.rgb( 255, 255, 255),
+                Color.rgb( 0, 0, 0)
+        )));
+
+        palettes.add(new ArrayList<>(Arrays.asList(
+                Color.rgb( 85, 255, 255),
+                Color.rgb( 255, 85, 255),
+                Color.rgb( 255, 255, 255),
+                Color.rgb( 255, 255, 85)
+        )));
+
+        paletteList.setCellFactory(list -> new PaletteCell());
+
+        paletteList.setItems(palettes);
     }
 
 

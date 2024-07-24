@@ -27,13 +27,7 @@ public class FloydSteinberg extends Filter {
         int width = source.getWidth();
         int height = source.getHeight();
 
-        ColorVector[][] imageArray = new ColorVector[width][height];
-        for (int row = 0; row < width; row++){
-            for (int column = 0; column < height; column++){
-                imageArray[row][column] = new ColorVector(source.getRGB(row, column));
-            }
-        }
-
+        ColorVector[][] imageArray = ColorVector.bufferedImageToArray(source);
 
         for (int row = 0; row < width; row++){
             for (int column = 0; column < height; column++){
@@ -65,16 +59,8 @@ public class FloydSteinberg extends Filter {
                 }
             }
         }
-        BufferedImage output = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
 
-
-        for (int row = 0; row < width; row++){
-            for (int column = 0; column < height; column++){
-                output.setRGB(row, column, imageArray[row][column].toIntARGB());
-            }
-        }
-
-        return output;
+        return ColorVector.arrayToBufferedImage(imageArray);
     }
 
     ColorVector findNewColor(ColorVector oldColor){

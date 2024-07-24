@@ -2,6 +2,8 @@ package web.arachne.corrudither.filters;
 
 import javafx.scene.paint.Color;
 
+import java.awt.image.BufferedImage;
+
 import static java.lang.Math.abs;
 import static java.lang.Math.sqrt;
 
@@ -84,5 +86,34 @@ class ColorVector {
                         Math.pow(this.g() - candidate.g(), 2) +
                         Math.pow(this.b() - candidate.b(), 2)
         ));
+    }
+
+    protected static ColorVector[][] bufferedImageToArray (BufferedImage source){
+        int width = source.getWidth();
+        int height = source.getHeight();
+
+        ColorVector[][] imageArray = new ColorVector[width][height];
+        for (int row = 0; row < width; row++){
+            for (int column = 0; column < height; column++){
+                imageArray[row][column] = new ColorVector(source.getRGB(row, column));
+            }
+        }
+        return imageArray;
+    }
+
+    protected static BufferedImage arrayToBufferedImage(ColorVector[][] source){
+
+        int width = source.length;
+        int height = source.length == 0 ? 0 : source[0].length;
+
+        BufferedImage output = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
+
+        for (int row = 0; row < width; row++){
+            for (int column = 0; column < height; column++){
+                output.setRGB(row, column, source[row][column].toIntARGB());
+            }
+        }
+
+        return output;
     }
 }

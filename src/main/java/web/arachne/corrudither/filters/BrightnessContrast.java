@@ -17,8 +17,14 @@ public class BrightnessContrast extends Filter {
      */
 
     @Override
-    public BufferedImage process(BufferedImage image) {
+    public BufferedImage process(BufferedImage source) {
 
-        return image;
+
+        ColorVector[][] imageArray = ColorVector.bufferedImageToArray(source);
+
+
+
+
+        return ColorVector.arrayToBufferedImage(imageArray);
     }
 }

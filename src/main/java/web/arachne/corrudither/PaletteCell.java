@@ -2,7 +2,6 @@ package web.arachne.corrudither;
 
 import javafx.geometry.Insets;
 import javafx.scene.control.ListCell;
-import javafx.scene.control.ListView;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;

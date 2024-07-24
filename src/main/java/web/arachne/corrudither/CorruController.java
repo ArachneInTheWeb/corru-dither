@@ -10,7 +10,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
-import javafx.util.Callback;
 import web.arachne.corrudither.filters.BrightnessContrast;
 import web.arachne.corrudither.filters.Filter;
 import web.arachne.corrudither.filters.FloydSteinberg;

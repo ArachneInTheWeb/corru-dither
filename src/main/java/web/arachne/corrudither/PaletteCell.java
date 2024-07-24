@@ -22,6 +22,11 @@ public class PaletteCell extends ListCell<List<Color>> {
 
         setItem(input);
 
+        if (input.isEmpty()){
+            setText("<No Palette>");
+            return;
+        }
+
         HBox paletteDisplay = new HBox();
 
         paletteDisplay.setPadding(new Insets(0, 5, 0, 5));

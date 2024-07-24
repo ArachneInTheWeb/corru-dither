@@ -169,9 +169,9 @@ public class FloydSteinberg extends Filter {
 
     private static double getRGBDist(ColorVector current, ColorVector candidate){
         return abs(sqrt(
-                Math.pow(current.r(), 2) - Math.pow(candidate.r(), 2) +
-                        Math.pow(current.g(), 2) - Math.pow(candidate.g(), 2) +
-                        Math.pow(current.b(), 2) - Math.pow(candidate.b(), 2)
+                Math.pow(current.r() - candidate.r(), 2) +
+                        Math.pow(current.g() - candidate.g(), 2) +
+                        Math.pow(current.b() - candidate.b(), 2)
         ));
     }
 

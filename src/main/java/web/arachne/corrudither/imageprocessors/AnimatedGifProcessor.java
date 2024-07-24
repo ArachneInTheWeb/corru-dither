@@ -39,7 +39,6 @@ public class AnimatedGifProcessor extends ImageProcessor {
             processedImages.add(new BufferedImage(cm, raster, isAlphaPremultiplied, null));
         }
 
-
         for (Filter filter : filters){
             processedImages.replaceAll(filter::process);
         }

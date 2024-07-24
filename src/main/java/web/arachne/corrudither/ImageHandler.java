@@ -1,6 +1,7 @@
 package web.arachne.corrudither;
 
 import javafx.scene.image.Image;
+import org.apache.commons.imaging.formats.gif.GifImageParser;
 import org.apache.commons.io.FilenameUtils;
 import web.arachne.corrudither.filters.Filter;
 import web.arachne.corrudither.imageprocessors.AnimatedGifProcessor;
@@ -17,7 +18,14 @@ public class ImageHandler {
 
     public void load(File file) throws IOException {
         if (FilenameUtils.getExtension(file.getAbsolutePath()).equals("gif")){
-            processor = new AnimatedGifProcessor();
+
+            GifImageParser parser = new GifImageParser();
+            if (parser.getMetadata(file).getItems().size() == 1){
+                processor = new StaticImageProcessor();
+            }else {
+                processor = new AnimatedGifProcessor();
+            }
+
         } else {
             processor = new StaticImageProcessor();
         }

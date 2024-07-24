@@ -262,8 +262,8 @@ public class AnimatedGifEncoder {
      *          int frame width.
      */
     public void setSize(int w, int h) {
-        if (started && !firstFrame)
-            return;
+//        if (started && !firstFrame)
+//            return;
         width = w;
         height = h;
         if (width < 1)

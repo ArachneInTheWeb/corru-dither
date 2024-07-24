@@ -1,6 +1,8 @@
 package web.arachne.corrudither;
 
 import javafx.application.Platform;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -98,7 +100,10 @@ public class CorruController {
         List<Filter> filters = new ArrayList<>();
 
         filters.add(new BrightnessContrast(contrastSlider.getValue(), brightnessSlider.getValue()));
-        filters.add(new FloydSteinberg(palette));
+
+        if (selectedPalette != null && !selectedPalette.isEmpty()){
+            filters.add(new FloydSteinberg(selectedPalette));
+        }
 
         imageView.setImage(imageHandler.process(filters));
     }
@@ -108,12 +113,7 @@ public class CorruController {
         Platform.exit();
     }
 
-    private final ArrayList<Color> palette = new ArrayList<>(Arrays.asList(
-            Color.rgb( 255, 0, 101),
-            Color.rgb( 255, 255, 0),
-            Color.rgb( 255, 255, 255),
-            Color.rgb( 0, 0, 0)
-    ));
+    private List<Color> selectedPalette;
 
     @FXML
     public void initialize(){
@@ -133,6 +133,8 @@ public class CorruController {
         });
 
         ObservableList<List<Color>> palettes = FXCollections.observableArrayList();
+
+        palettes.add(new ArrayList<>());
 
         palettes.add(new ArrayList<>(Arrays.asList(
                 Color.rgb( 255, 0, 101),
@@ -155,9 +157,30 @@ public class CorruController {
                 Color.rgb( 255, 255, 85)
         )));
 
+        palettes.add(new ArrayList<>(Arrays.asList(
+                Color.rgb( 85, 255, 255),
+                Color.rgb( 255, 85, 255),
+                Color.rgb( 255, 255, 255),
+                Color.rgb( 255, 255, 85),
+                Color.rgb( 0, 0, 0)
+        )));
+
+        palettes.add(new ArrayList<>(Arrays.asList(
+                Color.rgb( 255, 255, 255),
+                Color.rgb( 0, 0, 0)
+        )));
+
         paletteList.setCellFactory(list -> new PaletteCell());
 
         paletteList.setItems(palettes);
+
+        paletteList.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<List<Color>>() {
+            @Override
+            public void changed(ObservableValue<? extends List<Color>> observableValue, List<Color> oldPalette, List<Color> newPalette) {
+                selectedPalette = newPalette;
+                updateDisplay();
+            }
+        });
     }
 
 

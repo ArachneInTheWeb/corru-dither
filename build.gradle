@@ -61,10 +61,21 @@ test {
 }
 
 jlink {
-  imageZip = project.file("${buildDir}/distributions/app-${javafx.platform.classifier}.zip")
+  imageZip = project.file("${buildDir}/distributions/corru-dither.zip")
   options = ['--strip-debug', '--compress', '2', '--no-header-files', '--no-man-pages']
   launcher {
-    name = 'app'
+    name = 'corru-dither'
+  }
+  targetPlatform("mac-os"){
+    jdkHome = jdkDownload("https://builds.openlogic.com/downloadJDK/openlogic-openjdk/17.0.11+9/openlogic-openjdk-17.0.11+9-mac-x64.zip")
+  }
+
+  targetPlatform("windows"){
+    jdkHome = jdkDownload("https://builds.openlogic.com/downloadJDK/openlogic-openjdk/17.0.11+9/openlogic-openjdk-17.0.11+9-windows-x64.zip")
+  }
+
+  targetPlatform("linux"){
+    jdkHome = "/usr/lib/jvm/java-17-openjdk-amd64"
   }
 }
 

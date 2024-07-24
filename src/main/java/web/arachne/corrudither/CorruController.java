@@ -124,13 +124,9 @@ public class CorruController {
         brightnessSliderValue.textProperty().bind(brightnessSlider.valueProperty().asString("%.2f"));
         contrastSliderValue.textProperty().bind(contrastSlider.valueProperty().asString("%.2f"));
 
-        brightnessSlider.setOnMouseReleased((event) -> {
-            updateDisplay();
-        });
+        brightnessSlider.setOnMouseReleased((event) -> updateDisplay());
 
-        contrastSlider.setOnMouseReleased((event) -> {
-            updateDisplay();
-        });
+        contrastSlider.setOnMouseReleased((event) -> updateDisplay());
 
         ObservableList<List<Color>> palettes = FXCollections.observableArrayList();
 
@@ -174,12 +170,9 @@ public class CorruController {
 
         paletteList.setItems(palettes);
 
-        paletteList.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<List<Color>>() {
-            @Override
-            public void changed(ObservableValue<? extends List<Color>> observableValue, List<Color> oldPalette, List<Color> newPalette) {
-                selectedPalette = newPalette;
-                updateDisplay();
-            }
+        paletteList.getSelectionModel().selectedItemProperty().addListener((observableValue, oldPalette, newPalette) -> {
+            selectedPalette = newPalette;
+            updateDisplay();
         });
     }
 

@@ -32,10 +32,10 @@ public class AnimatedGifProcessor extends ImageProcessor {
     public Image process(List<Filter> filters) {
         processedImages.clear();
 
-        for (int i = 0; i < images.size(); i++){
-            ColorModel cm = images.get(i).getColorModel();
+        for (BufferedImage bufferedImage : images) {
+            ColorModel cm = bufferedImage.getColorModel();
             boolean isAlphaPremultiplied = cm.isAlphaPremultiplied();
-            WritableRaster raster = images.get(i).copyData(images.get(i).getRaster().createCompatibleWritableRaster());
+            WritableRaster raster = bufferedImage.copyData(bufferedImage.getRaster().createCompatibleWritableRaster());
             processedImages.add(new BufferedImage(cm, raster, isAlphaPremultiplied, null));
         }
 

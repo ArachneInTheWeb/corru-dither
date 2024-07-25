@@ -66,6 +66,15 @@ class ColorVector {
         return new ColorVector(r() + cv.r(), g() + cv.g(), b() + cv.b());
     }
 
+    ColorVector add(double s){
+        return new ColorVector(Math.round(r() + s), Math.round(g() + s), Math.round(b() + s));
+    }
+
+    ColorVector sub(double s){
+        return add(s * -1);
+    }
+
+
     ColorVector mult(ColorVector cv){
         return new ColorVector(r() * cv.r(), g() * cv.g(), b() * cv.b());
     }
